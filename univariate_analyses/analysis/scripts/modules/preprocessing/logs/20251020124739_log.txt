@@ -1,0 +1,18 @@
+
+Unequal observations for sub-001 ses-002 run-004, X: 231, dATNa: 232, dATNb: 232, DNa: 232, DNb: 232, SAL: 232, FPCNa: 232, FPCNb: 232, Skipping run.
+
+Unequal observations for sub-003 ses-001 run-001, X: 208, dATNa: 240, dATNb: 240, DNa: 240, DNb: 240, SAL: 240, FPCNa: 240, FPCNb: 240, Skipping run.
+
+Unequal observations for sub-011 ses-002 run-002, X: 384, dATNa: 386, dATNb: 386, DNa: 386, DNb: 386, SAL: 386, FPCNa: 386, FPCNb: 386, Skipping run.
+
+Unequal observations for sub-013 ses-002 run-004, X: 254, dATNa: 252, dATNb: 252, DNa: 252, DNb: 252, SAL: 252, FPCNa: 252, FPCNb: 252, Skipping run.
+
+Unequal observations for sub-019 ses-001 run-004, X: 310, dATNa: 308, dATNb: 308, DNa: 308, DNb: 308, SAL: 308, FPCNa: 308, FPCNb: 308, Skipping run.
+
+Unequal observations for sub-023 ses-002 run-001, X: 244, dATNa: 245, dATNb: 245, DNa: 245, DNb: 245, SAL: 245, FPCNa: 245, FPCNb: 245, Skipping run.
+
+Unequal observations for sub-023 ses-002 run-002, X: 265, dATNa: 266, dATNb: 266, DNa: 266, DNb: 266, SAL: 266, FPCNa: 266, FPCNb: 266, Skipping run.
+
+Unequal observations for sub-023 ses-002 run-003, X: 259, dATNa: 260, dATNb: 260, DNa: 260, DNb: 260, SAL: 260, FPCNa: 260, FPCNb: 260, Skipping run.
+
+Unequal observations for sub-023 ses-002 run-004, X: 257, dATNa: 258, dATNb: 258, DNa: 258, DNb: 258, SAL: 258, FPCNa: 258, FPCNb: 258, Skipping run.

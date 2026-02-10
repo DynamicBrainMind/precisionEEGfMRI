@@ -1,0 +1,16 @@
+name: eeg-fmri
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - ipython
+  - mne
+  - pyprojroot
+  - python=3.11
+  - scikit-learn=1.2.2
+  - autoreject
+  - pyarrow
+  - optuna
+  - xgboost
+  - shap
+prefix: /home/dave/miniconda3/envs/eeg-fmri

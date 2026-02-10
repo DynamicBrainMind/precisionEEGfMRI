@@ -1,0 +1,138 @@
+
+Unequal observations for sub-02 ses-001 run-002, X: 267, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-02 session ses-002. Skipping session.
+
+Unequal observations for sub-04 ses-001 run-001, X: 266, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Unequal observations for sub-04 ses-001 run-002, X: 272, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-04 session ses-002. Skipping session.
+
+Unequal observations for sub-05 ses-001 run-001, X: 269, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-05 session ses-002. Skipping session.
+
+Unequal observations for sub-06 ses-001 run-001, X: 273, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Unequal observations for sub-06 ses-001 run-002, X: 271, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-06 session ses-002. Skipping session.
+
+Unequal observations for sub-07 ses-001 run-001, X: 265, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Unequal observations for sub-07 ses-001 run-002, X: 272, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-07 session ses-002. Skipping session.
+
+Unequal observations for sub-08 ses-001 run-002, X: 266, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-08 session ses-002. Skipping session.
+
+Unequal observations for sub-09 ses-001 run-001, X: 269, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-09 session ses-002. Skipping session.
+
+Unequal observations for sub-10 ses-001 run-001, X: 269, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Unequal observations for sub-10 ses-001 run-002, X: 271, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-10 session ses-002. Skipping session.
+
+Unequal observations for sub-11 ses-001 run-001, X: 269, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Unequal observations for sub-11 ses-001 run-002, X: 267, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-11 session ses-002. Skipping session.
+
+Unequal observations for sub-12 ses-001 run-001, X: 271, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Unequal observations for sub-12 ses-001 run-002, X: 270, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-12 session ses-002. Skipping session.
+
+Unequal observations for sub-13 ses-001 run-001, X: 269, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Unequal observations for sub-13 ses-001 run-002, X: 271, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-13 session ses-002. Skipping session.
+
+Unequal observations for sub-14 ses-001 run-001, X: 267, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Unequal observations for sub-14 ses-001 run-002, X: 269, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-14 session ses-002. Skipping session.
+
+Unequal observations for sub-16 ses-001 run-001, X: 273, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-16 session ses-002. Skipping session.
+
+Unequal observations for sub-17 ses-001 run-001, X: 273, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Unequal observations for sub-17 ses-001 run-002, X: 272, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-17 session ses-002. Skipping session.
+
+Unequal observations for sub-18 ses-001 run-001, X: 269, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Unequal observations for sub-18 ses-001 run-002, X: 273, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-18 session ses-002. Skipping session.
+
+Unequal observations for sub-19 ses-001 run-001, X: 266, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Unequal observations for sub-19 ses-001 run-002, X: 271, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-19 session ses-002. Skipping session.
+
+Unequal observations for sub-20 ses-001 run-001, X: 265, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Unequal observations for sub-20 ses-001 run-002, X: 268, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-20 session ses-002. Skipping session.
+
+Unequal observations for sub-21 ses-001 run-001, X: 266, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-21 session ses-002. Skipping session.
+
+Unequal observations for sub-22 ses-001 run-002, X: 269, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-22 session ses-002. Skipping session.
+
+Unequal observations for sub-24 ses-001 run-001, X: 272, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-24 session ses-002. Skipping session.
+
+Unequal observations for sub-25 ses-001 run-001, X: 273, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Unequal observations for sub-25 ses-001 run-002, X: 271, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-25 session ses-002. Skipping session.
+
+Unequal observations for sub-26 ses-001 run-001, X: 270, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Unequal observations for sub-26 ses-001 run-002, X: 270, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-26 session ses-002. Skipping session.
+
+Unequal observations for sub-28 ses-001 run-001, X: 266, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Unequal observations for sub-28 ses-001 run-002, X: 271, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-28 session ses-002. Skipping session.
+
+Unequal observations for sub-29 ses-001 run-001, X: 271, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Unequal observations for sub-29 ses-001 run-002, X: 273, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-29 session ses-002. Skipping session.
+
+Unequal observations for sub-30 ses-001 run-001, X: 269, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Unequal observations for sub-30 ses-001 run-002, X: 273, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-30 session ses-002. Skipping session.
+
+Unequal observations for sub-33 ses-001 run-001, X: 270, dATNa: 276, dATNb: 276, DNa: 276, DNb: 276, SAL: 276, FPCNa: 276, FPCNb: 276, Yeo7_DN: 276, Skipping run.
+
+Missing data for subject sub-33 session ses-002. Skipping session.

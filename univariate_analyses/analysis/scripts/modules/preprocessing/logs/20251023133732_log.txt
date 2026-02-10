@@ -1,0 +1,2 @@
+
+Unequal observations for sub-003 ses-001 run-001, X: 208, dATNa: 240, dATNb: 240, DNa: 240, DNb: 240, SAL: 240, FPCNa: 240, FPCNb: 240, Skipping run.

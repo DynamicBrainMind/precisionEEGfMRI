@@ -1,0 +1,16 @@
+
+Unequal observations for sub-001 ses-002 run-004, X: 231, DAN: 232, DANa: 232, DANb: 232, DMN: 232, DNa: 232, DNb: 232, SAL: 232, FPCNa: 232, FPCNb: 232, Skipping run.
+
+Unequal observations for sub-003 ses-001 run-001, X: 208, DAN: 240, DANa: 240, DANb: 240, DMN: 240, DNa: 240, DNb: 240, SAL: 240, FPCNa: 240, FPCNb: 240, Skipping run.
+
+Unequal observations for sub-011 ses-002 run-002, X: 384, DAN: 386, DANa: 386, DANb: 386, DMN: 386, DNa: 386, DNb: 386, SAL: 386, FPCNa: 386, FPCNb: 386, Skipping run.
+
+Unequal observations for sub-013 ses-002 run-004, X: 254, DAN: 252, DANa: 252, DANb: 252, DMN: 252, DNa: 252, DNb: 252, SAL: 252, FPCNa: 252, FPCNb: 252, Skipping run.
+
+Unequal observations for sub-019 ses-001 run-004, X: 310, DAN: 308, DANa: 308, DANb: 308, DMN: 308, DNa: 308, DNb: 308, SAL: 308, FPCNa: 308, FPCNb: 308, Skipping run.
+
+Unequal observations for sub-020 ses-001 run-001, X: 245, DAN: 82, DANa: 82, DANb: 82, DMN: 82, DNa: 82, DNb: 82, SAL: 82, FPCNa: 82, FPCNb: 82, Skipping run.
+
+Missing data for subject sub-023 session ses-002. Skipping session.
+
+Unequal observations for sub-025 ses-001 run-001, X: 245, DAN: 155, DANa: 155, DANb: 155, DMN: 155, DNa: 155, DNb: 155, SAL: 155, FPCNa: 155, FPCNb: 155, Skipping run.

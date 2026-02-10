@@ -1,0 +1,22 @@
+
+Unequal observations for sub-001 ses-002 bld004, X: 231, y_dan: 232, y_dmn: 232. Skipping run.
+
+Unequal observations for sub-003 ses-001 bld001, X: 208, y_dan: 240, y_dmn: 240. Skipping run.
+
+Unequal observations for sub-011 ses-002 bld002, X: 384, y_dan: 386, y_dmn: 386. Skipping run.
+
+Unequal observations for sub-013 ses-002 bld004, X: 254, y_dan: 252, y_dmn: 252. Skipping run.
+
+Unequal observations for sub-019 ses-001 bld004, X: 310, y_dan: 308, y_dmn: 308. Skipping run.
+
+Unequal observations for sub-020 ses-001 bld001, X: 245, y_dan: 82, y_dmn: 82. Skipping run.
+
+Unequal observations for sub-023 ses-002 run-001, X: 244, y_dan: 245, y_dmn: 245. Skipping run.
+
+Unequal observations for sub-023 ses-002 run-001, X: 265, y_dan: 266, y_dmn: 266. Skipping run.
+
+Unequal observations for sub-023 ses-002 run-002, X: 259, y_dan: 260, y_dmn: 260. Skipping run.
+
+Unequal observations for sub-023 ses-002 run-003, X: 257, y_dan: 258, y_dmn: 258. Skipping run.
+
+Unequal observations for sub-025 ses-001 bld001, X: 245, y_dan: 155, y_dmn: 155. Skipping run.
