@@ -5,6 +5,7 @@ mkdir('figs');
 sublist = dir([data_dir '/sub*']);
 sublist = {sublist.name};
 networks = {'Yeo7_DN'; 'DNa';'DNb'};
+%networks = {'Yeo7_DN'; 'Yeo17_DNA';'Yeo17_DNB'};
 freqs = {'Delta'; 'Theta'; 'Alpha'; 'Beta'; 'Gamma'};
 network_colors = [[0 0 0]; [[187 55 56]/255]; [[254 147 134]/255]];
 

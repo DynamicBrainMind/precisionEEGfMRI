@@ -4,9 +4,12 @@ data_dir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/correlation_d
 mkdir('figs');
 sublist = dir([data_dir '/sub*']);
 sublist = {sublist.name};
-networks = {'DNa';'DNb'};
+%networks = {'DNa';'DNb'};
+networks = {'DNa'; 'Yeo17_DNA'};
 freqs = {'Delta'; 'Theta'; 'Alpha'; 'Beta1'; 'Beta2'; 'Gamma'};
-network_colors = [[[187 55 56]/255]; [[254 147 134]/255]];
+%network_colors = [[[187 55 56]/255]; [[254 147 134]/255]]; DNa vs. DNb
+network_colors = [[[187 55 56]/255]; [[0 0 0]/255]]; % DNa vs. Yeo17-DNa
+%network_colors = [[[254 147 134]/255]; [1 1 1]]; % DNb vs. Yeo17-DNb
 
 % Load in and concatenate matrices for each network
 for i=1:length(networks)
@@ -75,7 +78,7 @@ end
 figure('Position',[200,200,600,600]);
 x_start = 1;
 for i=1:length(freqs)
-    scatter([x_start:x_start+size(all_freq_network_corrs{i},2)-1],mean_corrs{i},90,network_colors,'filled')
+    scatter([x_start:x_start+size(all_freq_network_corrs{i},2)-1],mean_corrs{i},100,network_colors,'filled','LineWidth',2,'MarkerEdgeColor',[0 0 0])
     hold on;
     errorbar([x_start:x_start+size(all_freq_network_corrs{i},2)-1],mean_corrs{i},ste_corrs{i},'LineWidth',1,'Color',[0 0 0]);
     set(gca,'Fontsize',22,'Fontweight','normal','LineWidth',1,'TickDir','out','box','off');

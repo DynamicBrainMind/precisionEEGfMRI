@@ -1,16 +1,25 @@
 % plot EEG-fMRI corrs for all frequency and up to 20 seconds of lag
 % Must first run 01_mk_EEG_fMRI_corr_matrices.m
+% For visual/sensorimotor channel ROI plots, must first run mk_EEG_fMRI_corr_matrices_channelspecific.m
 
+individual_plots=0;
+visual_chans = 2; % set to 1 to plot data from visual channels only, 2 to plot from sensorimotor only
+sensorimotor_chans = 0;
+set_clims = 1; % set custom heatmap scale (next variable)
+custom_clims = [[.12];[.04]];
+addpath('functions');
 data_dir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/correlation_data/corr_mats'];
 mkdir('figs');
 sublist = dir([data_dir '/sub*']);
 sublist = {sublist.name};
+networks = {'DNa'; 'DNb'};
+%networks = {'Yeo17_DNA'; 'Yeo17_DNB'};
 %networks = {'Yeo7_DN'; 'DNa'; 'DNb'};
 %networks = {'DNa';'DNb';'FPCNa';'FPCNb';'dATNa';'dATNb'};
 %networks = {'RH_DefaultA_IPL'; 'RH_DefaultB_IPL'; 'RH_ContB_IPL'};
 %networks = {'LH_DefaultA_PFCm'; 'LH_DefaultB_PFCd'; 'LH_ContB_PFCmp'};
 %networks = {'LH_DefaultA_IPL'; 'LH_DefaultB_IPL'; 'LH_ContB_IPL'};
-networks = {'RH_DefaultA_Temp'; 'RH_DefaultB_Temp'; 'RH_ContB_Temp'};
+%networks = {'RH_DefaultA_Temp'; 'RH_DefaultB_Temp'; 'RH_ContB_Temp'};
 %networks = {'RH_DefaultA_pCunPCC'; 'RH_ContB_PCC'};
 freqs = {'δ'; 'θ'; 'α'; 'β'; 'γ'};
 do_network_pairs = 0; % set to 1 to do stats/plot network pairs
@@ -29,7 +38,13 @@ for i=1:length(networks)
     network_allsubs = []; p_mask = [];
     for j=1:length(sublist)
         subject_mean = [];
-        load([data_dir '/' sublist{j} '/' networks{i} '_mean.mat']);
+        if visual_chans==1
+            load([data_dir '/' sublist{j} '/' networks{i} '_visual_mean.mat']);
+        elseif visual_chans==2
+            load([data_dir '/' sublist{j} '/' networks{i} '_sensorimotor_mean.mat']);
+        else
+            load([data_dir '/' sublist{j} '/' networks{i} '_mean.mat']);
+        end
         %subject_mean_canonical(7:end,:) = []; % chop out lags > 10 sec
         %subject_mean = fisherz(subject_mean);
         network_allsubs(:,:,j) = subject_mean;
@@ -47,6 +62,11 @@ for i=1:length(networks)
     % store mean and p values across subjects for plotting later
     network_mean{i} = mean(network_allsubs,3);
     network_p{i} = p_mask;
+end
+
+% individual subject paired network plots
+if individual_plots==1
+    plot_eeg_fmri_individuals_networkpairs_long(allnetworks_allsubs,networks,sublist);
 end
 
 % paired tests between subnetworks
@@ -93,9 +113,13 @@ for i=1:length(network_mean)
     %else
         ylabel(['Lag relative to BOLD (s)']);
     %end
-    c_max = max(abs(network_mean{i}(:)));
-    caxis([-c_max c_max]);
-        c_limits = c.Limits;
+    if set_clims==0
+        c_max = max(abs(network_mean{i}(:)));
+        caxis([-c_max c_max]);
+    else
+       caxis([-custom_clims(i) custom_clims(i)]);
+    end
+    c_limits = c.Limits;
     c.Ticks = c_limits;
     %title(networks{i})
     box off
