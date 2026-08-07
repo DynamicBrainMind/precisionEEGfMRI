@@ -1,8 +1,10 @@
 % For experience sampling data, label each TRs as rest (1) vs thought probe (2) and save to a vector
 
-%% settings
+%% CHANGE DIRECTORIES BELOW FOR YOUR SYSTEM
 bids_dir = '/Users/ak4379/Documents/data/R21_EEG-fMRI/bids_data';
 mshbm_dir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/MSHBM_sdc'];
+
+%% settings
 %sublist = dir('/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/CBIG_preproc_fmap_highpass/sub*');
 %sublist = {sublist.name};
 sublist = {'sub-023'};

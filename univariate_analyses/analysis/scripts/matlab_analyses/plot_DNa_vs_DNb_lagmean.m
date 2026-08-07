@@ -1,17 +1,28 @@
-% Plot summaries of EEG-fMRI correlations for Yeo7 DN vs DNa and DNb
+% Plot summaries of lag-meaned EEG-fMRI correlations for two different networks
+% Performs stats in each frequency band to compare the two networks
+% Must first run step1_mk_EEG_fMRI_corr_matrices.m
 
+%% CHANGE DIRECTORIES BELOW FOR YOUR SYSTEM
 data_dir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/correlation_data/corr_mats'];
+
+%% general setup: select networks and colors for plotting
 mkdir('figs');
 sublist = dir([data_dir '/sub*']);
 sublist = {sublist.name};
-%networks = {'DNa';'DNb'};
-networks = {'DNa'; 'Yeo17_DNA'};
+networks = {'DNa';'DNb'};
+%networks = {'DNa'; 'Yeo17_DNA'};
+%networks = {'dATNb'; 'Yeo17_DATNB'};
 freqs = {'Delta'; 'Theta'; 'Alpha'; 'Beta1'; 'Beta2'; 'Gamma'};
-%network_colors = [[[187 55 56]/255]; [[254 147 134]/255]]; DNa vs. DNb
-network_colors = [[[187 55 56]/255]; [[0 0 0]/255]]; % DNa vs. Yeo17-DNa
+network_colors = [[[187 55 56]/255]; [[254 147 134]/255]]; %DNa vs. DNb
+%network_colors = [[[187 55 56]/255]; [[0 0 0]/255]]; % DNa vs. Yeo17-DNa
 %network_colors = [[[254 147 134]/255]; [1 1 1]]; % DNb vs. Yeo17-DNb
+%network_colors = [[[79 130 181]/255]; [0 0 0]]; % FPCNa vs. Yeo17-FPCNa
+%network_colors = [[[165 218 244]/255]; [1 1 1]]; % FPCNb vs. Yeo17-FPCNb
+%network_colors = [[[55 119 62]/255]; [0 0 0]]; % dATNa vs. Yeo17-dATNa
+%network_colors = [[[206 224 164]/255]; [1 1 1]]; % dATNb vs. Yeo17-dATNb
+ylimits = [-.03 .12]; % -0.03 to 0.12 for DN; -0.12 to 0.03 for other networks
 
-% Load in and concatenate matrices for each network
+%% Load in and concatenate matrices for each network
 for i=1:length(networks)
     network_allsubs = []; p_mask = [];
     for j=1:length(sublist)
@@ -31,7 +42,7 @@ for i=1:length(networks)
     end
 end
 
-% two-way RM-ANOVA
+%% two-way RM-ANOVA
 Y = []; S = []; F1=[]; F2=[]; 
 FACTNAMES = {'frequency';'network'};
 for i=1:length(all_freq_network_corrs)
@@ -42,7 +53,7 @@ for i=1:length(all_freq_network_corrs)
 end
 rm_anova_stats = rm_anova2(Y,S,F1,F2,FACTNAMES);
 
-% Stats for each frequency band
+%% Stats for each frequency band
 for i=1:length(freqs)
     % Friedman test for interaction
     [p_freq(i),friedman_table{i},friedman_stats{i}] = friedman(all_freq_network_corrs{i},1,'off');
@@ -62,11 +73,7 @@ for i=1:length(freqs)
     p_fdr{i} = fdr(p_fdr{i});
 end 
 
-% organize data for RM-ANOVA
-
-
-
-% Get mean + STE for plotting
+%% Get mean + STE for plotting
 for i=1:length(freqs)
     mean_corrs{i} = mean(all_freq_network_corrs{i});
     n = size(all_freq_network_corrs{i}, 1); % Number of observations (rows)
@@ -104,7 +111,7 @@ for i=1:length(p_fdr)
     end
     end
 end
-ylim([-0.03 0.12])
+ylim([ylimits])
 print('-opengl','-r600','-dpng',['figs/DNa_vs_DNb_MSHBM_eeg_fmri.png']);  
 
 

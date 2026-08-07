@@ -2,17 +2,20 @@
 % Must first run 01_mk_EEG_fMRI_corr_matrices.m
 % For visual/sensorimotor channel ROI plots, must first run mk_EEG_fMRI_corr_matrices_channelspecific.m
 
+%% CHANGE DIRECTORIES BELOW FOR YOUR SYSTEM
+data_dir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/correlation_data/corr_mats'];
+
+%% Settings
 individual_plots=0;
-visual_chans = 2; % set to 1 to plot data from visual channels only, 2 to plot from sensorimotor only
+visual_chans = 0; % set to 1 to plot data from visual channels only, 2 to plot from sensorimotor only
 sensorimotor_chans = 0;
 set_clims = 1; % set custom heatmap scale (next variable)
-custom_clims = [[.12];[.04]];
+custom_clims = [[.12];[.12]];
 addpath('functions');
-data_dir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/correlation_data/corr_mats'];
 mkdir('figs');
 sublist = dir([data_dir '/sub*']);
 sublist = {sublist.name};
-networks = {'DNa'; 'DNb'};
+networks = {'AntHipp'; 'PostHipp'};
 %networks = {'Yeo17_DNA'; 'Yeo17_DNB'};
 %networks = {'Yeo7_DN'; 'DNa'; 'DNb'};
 %networks = {'DNa';'DNb';'FPCNa';'FPCNb';'dATNa';'dATNb'};
@@ -33,7 +36,7 @@ inter_colors = cbrewer('div','PuOr',256);
 inter_colors = abs(inter_colors);
 inter_colors = flipud(inter_colors);
 
-% Load in and concatenate matrices for each network
+%% Load in and concatenate matrices for each network
 for i=1:length(networks)
     network_allsubs = []; p_mask = [];
     for j=1:length(sublist)
@@ -64,12 +67,12 @@ for i=1:length(networks)
     network_p{i} = p_mask;
 end
 
-% individual subject paired network plots
+%% individual subject paired network plots
 if individual_plots==1
     plot_eeg_fmri_individuals_networkpairs_long(allnetworks_allsubs,networks,sublist);
 end
 
-% paired tests between subnetworks
+%% paired tests between subnetworks
 if do_network_pairs==1
 for i = 1:size(allnetworks_allsubs,2)/2
     p_fdr=[]; p_mask =[];
@@ -89,15 +92,17 @@ for i = 1:size(allnetworks_allsubs,2)/2
 end
 end
 
-% plot mean heatmaps across all subjects for each network
-figure('Position',[200,200,400,1500]);
+%% plot mean heatmaps across all subjects for each network
+figure('Position',[200,200,1000,400]);
+t = tiledlayout(1, 2, 'TileSpacing', 'loose', 'Padding', 'loose');
 for i=1:length(network_mean)
-    subplot(3,1,i)
+    %subplot(3,1,i)
+    nexttile(t)
     imagesc(network_mean{i}); % Display the image
     colormap(colors);
     set(gca, 'YDir', 'normal') % flip y 
     c=colorbar('Location','eastoutside');
-    c.FontSize=16;
+    c.FontSize=22;
     c.Label.String=[{['\rho' '_{EEG,fMRI}'];[' ']}];
     c.Label.VerticalAlignment = 'bottom';
     set(gca,'xtick',0:5:size(network_mean{i},2))
@@ -106,12 +111,12 @@ for i=1:length(network_mean)
     set(gca,'ytick',1:size(network_mean{i},1))
     set(gca,'yticklabel',0:2:20)
     set(gca,'TickLength',[0 0])
-    set(gca,'FontSize',18,'FontName','Arial');
+    set(gca,'FontSize',22,'FontName','Arial');
     xlabel({['Frequency'];[' ']});
     %if mod(i, 2) == 0
     %    ylabel({[' '];[' '];[' ']});
     %else
-        ylabel(['Lag relative to BOLD (s)']);
+        ylabel({[' '];['Lag relative to BOLD (s)']});
     %end
     if set_clims==0
         c_max = max(abs(network_mean{i}(:)));
@@ -121,7 +126,7 @@ for i=1:length(network_mean)
     end
     c_limits = c.Limits;
     c.Ticks = c_limits;
-    %title(networks{i})
+    title(networks{i})
     box off
     hold on;
     [y_fdr,x_fdr]=find(network_p{i}==1);

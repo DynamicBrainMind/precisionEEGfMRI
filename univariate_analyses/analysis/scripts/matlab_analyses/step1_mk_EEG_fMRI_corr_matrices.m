@@ -1,29 +1,41 @@
-% set output location
-outdir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/correlation_data'];
-mkdir([outdir '/corr_mats']);
-skip_sess1 = {'sub-003';'sub-025'};
-skip_sess2 = {'sub-017'};
+% Must run this to prepare data before running any other matlab functions
+% Make EEG-BLP lag/frequency correlation matrix for each network and save .mat files for each run and means per sessions/subjects
+% INPUTS: 
+% The input is a large .csv file that includes EEG-BLP correlations with  BOLD for all networks, ROIs, subjects, sessions, runs, frequencies, and lags
+% To generate this .csv file: 
+% 1) Run R+python pipeline under analysis/scripts/modules/preprocessing
+% 2) Convert output from final step in that pipeline (04-compute_correlations.r) to csv using feather_to_csv.r
 
-% Load correlations (averaged across channels)
+%% Set to run on outputs for GSR or aCompCor BOLD data 
+aCompCor=0; % 0 for GSR, 1 for aCompCor
+
+%% CHANGE DIRECTORIES BELOW FOR YOUR SYSTEM
+% Set outdir (both input and output) location
+if aCompCor==1
+    outdir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/correlation_data_aCompCor'];
+else
+    outdir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/correlation_data'];
+end
+
+%% setup
+mkdir([outdir '/corr_mats']);
+skip_sess1 = {};
+skip_sess2 = {};
+%skip_sess1 = {'sub-003';'sub-025'}; % subjects with missing session 1 data
+%skip_sess2 = {'sub-017'}; % subjects with missing session 2 data
+
+%% Load correlations (averaged across channels)
 data = readtable([outdir '/correlations_long_across_channel.csv']);
-%textdata = data.textdata;
 corr_data = data.cors;
-%corr_data = [NaN; corr_data]; % shift by 1 to match textdata
 subs = unique(data.subject);
-%subs = unique(data.textdata(2:end,1));
 sessions = unique(data.session);
-%sessions = unique(data.textdata(2:end,2));
 runs = unique(data.run);
-%runs = unique(data.textdata(2:end,3));
 freqs = unique(data.frequency);
-%freqs = unique(data.textdata(2:end,4));
 lags = unique(data.lag);
-%lags = unique(data.textdata(2:end,5));
 networks = unique(data.network);
-%networks = unique(data.textdata(2:end,6));
 textdata = table2cell(data);
 
-% Compile mean corr matrices for each run (one for each network)
+%% Compile mean corr matrices for each run (one for each network)
 lags = sort(lags);
 freqs = sort(freqs);
 
@@ -39,18 +51,15 @@ for i = 1:length(subs)
                 sess_inds = []; run_inds = []; network_inds = []; sub_sess_inds = []; sub_sess_run_inds = [];
                 corr_mat_canonical = []; corr_mat_canonical_beta = [];
                 sub_inds = strmatch(subs{i},data.subject,'exact');
-                %sub_inds = strmatch(subs{i},textdata(:,1),'exact');
                 sess_inds = strmatch(sessions{j},data.session,'exact');
-                %sess_inds = strmatch(sessions{j},textdata(:,2),'exact'); 
                 run_inds = strmatch(runs{k},data.run,'exact');
-                %run_inds = strmatch(runs{k},textdata(:,3),'exact');
                 network_inds = strmatch(networks{m},data.network,'exact');
-                %network_inds = strmatch(networks{m},textdata(:,6),'exact');
                 sub_sess_inds = intersect(sub_inds,sess_inds);
                 sub_sess_run_inds = intersect(sub_sess_inds,run_inds);
                 sub_sess_run_network_inds = intersect(sub_sess_run_inds,network_inds);
                 curr_textdata = textdata(sub_sess_run_network_inds,:);
                 curr_data = corr_data(sub_sess_run_network_inds);
+                if ~isempty(curr_data) % skip run if missing
                 % fill in matrix (x = freq, y = lag)
                 corr_mat = NaN(length(lags),length(freqs));
                 curr_lags = cell2mat(curr_textdata(:,5));
@@ -68,8 +77,6 @@ for i = 1:length(subs)
                 corr_mat_canonical = [mean(corr_mat(:,1:3),2) mean(corr_mat(:,4:7),2) mean(corr_mat(:,8:12),2)...
                     mean(corr_mat(:,13:30),2) mean(corr_mat(:,31:40),2)];
                 % make corr matrix with averaging of canonical frequency: with beta subbands included
-                %corr_mat_canonical_beta = [mean(corr_mat(:,1:3),2) mean(corr_mat(:,4:7),2) mean(corr_mat(:,8:12),2)...
-                %    mean(corr_mat(:,13:16),2),mean(corr_mat(:,17:23),2),mean(corr_mat(:,24:30),2) , mean(corr_mat(:,31:40),2)];
                 corr_mat_canonical_beta = [mean(corr_mat(:,1:3),2) mean(corr_mat(:,4:7),2) mean(corr_mat(:,8:12),2)...
                     mean(corr_mat(:,13:20),2),mean(corr_mat(:,21:30),2), mean(corr_mat(:,31:40),2)];
                 % store all correlations
@@ -80,10 +87,14 @@ for i = 1:length(subs)
                 save([outdir '/corr_mats/' subs{i} '/' sessions{j} '/' runs{k} '_' networks{m} '_canonical.mat'],'corr_mat_canonical');
                 save([outdir '/corr_mats/' subs{i} '/' sessions{j} '/' runs{k} '_' networks{m} '_canonical_beta.mat'],'corr_mat_canonical_beta');
                 display(['done ' subs{i} ' ' sessions{j} ' ' runs{k} ' ' networks{m}]);
+                end
             end
         end
     
     %Compute and save average corr matrices for sessions 
+    corr_mat_allnetworks=corr_mat_allnetworks(~cellfun('isempty',corr_mat_allnetworks));
+    corr_mat_canonical_allnetworks=corr_mat_canonical_allnetworks(~cellfun('isempty', corr_mat_canonical_allnetworks));
+    corr_mat_canonical_beta_allnetworks=corr_mat_canonical_beta_allnetworks(~cellfun('isempty', corr_mat_canonical_beta_allnetworks));
     for k = 1:length(networks)
         network_allruns = []; session_mean = []; network_allruns_canonical = []; network_allruns_canonical_beta = []; 
         for m = 1:size(corr_mat_allnetworks,2)

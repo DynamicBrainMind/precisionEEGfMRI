@@ -1,11 +1,16 @@
 % plot EEG-fMRI corrs for all frequency and up to 20 seconds of lag
-% Must first run 01_mk_EEG_fMRI_corr_matrices.m
+% Must first run step1_mk_EEG_fMRI_corr_matrices.m
 
-individual_plots=0;
+%% CHANGE DIRECTORIES BELOW FOR YOUR SYSTEM
 data_dir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/correlation_data/corr_mats'];
 mkdir('figs/intersession');
+
+%% settings
+individual_plots=0;
 sublist = {'sub-001','sub-002','sub-004','sub-006','sub-007','sub-008','sub-009','sub-010','sub-011','sub-012',...
-    'sub-013','sub-014','sub-015','sub-016','sub-018','sub-019','sub-020','sub-021','sub-023','sub-024'};
+    'sub-013','sub-014','sub-015','sub-016','sub-017','sub-018','sub-019','sub-020','sub-021','sub-023','sub-024','sub-025'};
+%sublist = {'sub-001','sub-002','sub-004','sub-006','sub-007','sub-008','sub-009','sub-010','sub-011','sub-012',...
+%    'sub-013','sub-014','sub-015','sub-016','sub-018','sub-019','sub-020','sub-021','sub-023','sub-024'};
 networks = {'DNa';'DNb';'FPCNa';'FPCNb';'dATNa';'dATNb'};
 freqs = {'δ'; 'θ'; 'α'; 'β'; 'γ'};
 colors = cbrewer('div','RdBu',256);
@@ -17,7 +22,7 @@ inter_colors = flipud(inter_colors);
 network_colors = [([187 55 56]/255); ([254 147 134]/255); ([79 130 181]/255);...
     ([165 218 244]/255); ([55 119 62]/255); ([206 224 164]/255)]; 
 
-% Load in and concatenate matrices for each network
+%% Load in and concatenate matrices for each network
 for i=1:length(networks)
     network_allsubs = []; p_mask = [];
     for j=1:length(sublist)
@@ -31,7 +36,7 @@ for i=1:length(networks)
     end
 end
 
-% compute inter-session ICC across subjects for each network
+%% compute inter-session ICC across subjects for each network
 for i=1:length(networks)
     reliability_corr_matrix = NaN(size(network_allsubs_ses001,1),size(network_allsubs_ses001,2));
     reliability_ICC_matrix = NaN(size(network_allsubs_ses001,1),size(network_allsubs_ses001,2));
@@ -48,9 +53,8 @@ for i=1:length(networks)
     allnetworks_reliability_ICC_matrix{i}=reliability_ICC_matrix;
 end
 
-% plot heatmaps for the two sessions for each subject and network
+%% plot heatmaps for the two sessions for each subject and network
 % make one plot for each subject
-
 for i=1:length(sublist)
     for j=1:length(networks)
         % compute ICC
@@ -136,7 +140,8 @@ for i = 1:6
     scatter(x, data(:,i), 30, 'k', 'filled', ...
         'MarkerFaceAlpha', 0.6);
 end
-% Summary metrics (mean ± SEM)
+
+%% Summary metrics (mean ± SEM)
 means = mean(data);
 sems  = std(data) ./ sqrt(size(data,1));
 % Mean markers
@@ -155,7 +160,7 @@ box on;
 print('-opengl','-r600','-dpng',['figs/intersession_correlations.png']); 
 pause; close;
 
-% plot reliability correlation matrices
+%% plot reliability correlation matrices
 colors = cbrewer('div','RdBu',256);
 colors = abs(colors);
 colors = flipud(colors);
@@ -164,7 +169,7 @@ figure('Position',[200,200,1200,600]);
     t = tiledlayout(2, 3);
 for i=1:length(networks)
     nexttile(tile_indices(i));
-    imagesc(allnetworks_reliability_ICC_matrix{i}); % Display the image
+    imagesc(allnetworks_reliability_ICC_matrix{i},[-.43 .86]); % Display the image
     colormap(colors);
     set(gca, 'YDir', 'normal') % flip y 
     c=colorbar('Location','eastoutside');

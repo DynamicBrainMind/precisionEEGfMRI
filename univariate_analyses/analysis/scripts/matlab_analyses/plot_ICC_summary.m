@@ -1,9 +1,12 @@
 % Plot summaries of ICC for each network as a function of lag
 % x axis = lag; y axis = ICC
+% Must first generate iccs_full.csv file using 02-compute_icc.r and 03-compute_cc.r and then convert output to .csv
+
+%% CHANGE DIRECTORIES BELOW FOR YOUR SYSTEM
+data_dir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/correlation_data'];
 
 %% load ICC for each network (for every channel)
-data_dir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/correlation_data'];
-data = importdata([data_dir '/iccs_full.csv']);
+data = importdata([data_dir '/iccs_full.csv']); 
 ICC_all = [NaN; data.data];
 textdata = data.textdata;
 networks = {'DNa';'DNb';'FPCNa';'FPCNb';'dATNa';'dATNb'};

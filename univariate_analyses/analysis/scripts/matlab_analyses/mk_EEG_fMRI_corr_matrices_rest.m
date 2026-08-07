@@ -1,10 +1,14 @@
-% set output location
+% Similar to step_mk_EEG_fMRI_corr_matrices.m but for rest run only
+
+%% CHANGE DIRECTORIES BELOW FOR YOUR SYSTEM
 outdir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/correlation_data'];
+
+%% Settings
 mkdir([outdir '/corr_mats']);
 skip_sess1 = {'sub-003';'sub-025'};
 skip_sess2 = {'sub-017'};
 
-% Load correlations (averaged across channels) and isolate rest condition
+%% Load correlations (averaged across channels) and isolate rest condition
 data = readtable([outdir '/correlations_long_bytask_across_channel.csv']);
 gradcpt_inds = strmatch('gradcpt',data.task,'exact');
 tp_inds = strmatch('tp',data.task,'exact');
@@ -27,7 +31,7 @@ networks = unique(data.network);
 %networks = unique(data.textdata(2:end,6));
 textdata = table2cell(data);
 
-% Compile mean corr matrices for each run (one for each network)
+%% Compile mean corr matrices for each run (one for each network)
 lags = sort(lags);
 freqs = sort(freqs);
 
@@ -106,7 +110,7 @@ for i = 1:length(subs)
     end
 end
 
- % Compute average corr matrices for subject
+ %% Compute average corr matrices for subject
  for i=1:length(subs)
      if isempty(strmatch(subs{i},[skip_sess1; skip_sess2],'exact'))
      for j=1:length(networks)
@@ -129,7 +133,7 @@ end
      end 
  end
  
- % for subjects with only 1 session, copy session mean to be subject mean
+ %% for subjects with only 1 session, copy session mean to be subject mean
  for i=1:length(skip_sess1)
      for j=1:length(networks)
         load([[outdir '/corr_mats/' skip_sess1{i} '/ses-002/' networks{j} '_mean_rest.mat']]);

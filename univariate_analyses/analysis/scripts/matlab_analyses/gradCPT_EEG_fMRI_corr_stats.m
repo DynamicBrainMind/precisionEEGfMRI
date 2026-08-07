@@ -1,9 +1,12 @@
 % Run mass-univariate stats and plot
 % Significant EEG-fMRI correlations for each network
 % Significant differences in EEG-fMRI correlations between pairs of subnetworks
-% Must first run 01_mk_EEG_fMRI_corr_matrices.m
+% Must first run step1_mk_EEG_fMRI_corr_matrices.m
 
+%% CHANGE DIRECTORIES BELOW FOR YOUR SYSTEM
 data_dir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/correlation_data/corr_mats'];
+
+%% Settings
 mkdir('figs');
 sublist = {'sub-001'; 'sub-002';'sub-004';'sub-006';'sub-007';'sub-008';'sub-009';'sub-010';...
     'sub-011';'sub-012';'sub-013';'sub-014';'sub-015';'sub-016';'sub-018';'sub-019';'sub-020';...

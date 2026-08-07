@@ -3,10 +3,12 @@
 % series
 % also computes n TRs retained for analysis in each condition
 
-%% settings
+%% CHANGE DIRECTORIES BELOW FOR YOUR SYSTEM
 mshbm_dir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/MSHBM_sdc'];
 arealmshbm_dir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/ArealMSHBM_sdc'];
 sublist = dir('/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/CBIG_preproc_fmap_highpass/sub*');
+
+%% settings
 sublist = {sublist.name};
 sessions = {'ses-001'; 'ses-002'};
 runs = {'bld002';'bld003';'bld004'};

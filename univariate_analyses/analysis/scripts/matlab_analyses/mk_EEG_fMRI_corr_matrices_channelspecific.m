@@ -1,3 +1,11 @@
+% Similar to step_mk_EEG_fMRI_corr_matrices.m but for averages across selected channels
+
+%% CHANGE DIRECTORIES BELOW FOR YOUR SYSTEM
+outdir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/correlation_data'];
+mkdir([outdir '/corr_mats']);
+skip_sess1 = {'sub-003';'sub-025'};
+skip_sess2 = {'sub-017'};
+
 %% set channels of interest
 visual_alpha = 1; % 1 = visual alpha; 2 = sensorimotor mu
 if visual_alpha==2
@@ -8,16 +16,10 @@ else
     outname = 'sensorimotor';
 end
 
-% set output location
-outdir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/correlation_data'];
-mkdir([outdir '/corr_mats']);
-skip_sess1 = {'sub-003';'sub-025'};
-skip_sess2 = {'sub-017'};
-
-% Load all correlations for all channels
+%% Load all correlations for all channels
 data = readtable([outdir '/correlations_long.csv']);
 
-% Remove correlations for channels of no interest
+%% Remove correlations for channels of no interest
 keep_inds=[];
 for i = 1:length(chan_roi)
     keep_inds = [keep_inds; strmatch(chan_roi{i},data.channel,'exact')];
@@ -26,7 +28,7 @@ data = data(keep_inds,:);
 
 %chans = unique(data.channel);
 
-% Extract relevant variables
+%% Extract relevant variables
 corr_data = data.cors;
 subs = unique(data.subject);
 sessions = unique(data.session);
@@ -37,7 +39,7 @@ networks = unique(data.network);
 %chans = unique(data.channel);
 textdata = table2cell(data);
 
-% Compile mean corr matrices for each run (one for each network)
+%% Compile mean corr matrices for each run (one for each network)
 lags = sort(lags);
 freqs = sort(freqs);
 
@@ -112,7 +114,7 @@ for i = 1:length(subs)
     end
 end
 
- % Compute average corr matrices for subject
+ %% Compute average corr matrices for subject
  for i=1:length(subs)
      if isempty(strmatch(subs{i},[skip_sess1; skip_sess2],'exact'))
      for j=1:length(networks)
@@ -135,7 +137,7 @@ end
      end 
  end
  
- % for subjects with only 1 session, copy session mean to be subject mean
+ %% for subjects with only 1 session, copy session mean to be subject mean
  for i=1:length(skip_sess1)
      for j=1:length(networks)
         load([[outdir '/corr_mats/' skip_sess1{i} '/ses-002/' networks{j} '_mean.mat']]);

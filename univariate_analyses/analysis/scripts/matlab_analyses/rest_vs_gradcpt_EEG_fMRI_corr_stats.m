@@ -1,9 +1,12 @@
 % Compare EEG-fMRI correlations for each network: GradCPT vs. Rest
 % Significant EEG-fMRI correlations for each network
-% Must first run mk_EEG_fMRI_corr_matrices.m and mk_EEG_fMRI_corr_matrices_rest.m
+% Must first run step1_mk_EEG_fMRI_corr_matrices.m and mk_EEG_fMRI_corr_matrices_rest.m
 
-beta_split = 1; % 0 = don't split up beta band; 1 = split up beta band
+%% CHANGE DIRECTORIES BELOW FOR YOUR SYSTEM
 data_dir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/correlation_data/corr_mats'];
+
+%% settings
+beta_split = 1; % 0 = don't split up beta band; 1 = split up beta band
 mkdir('figs');
 sublist = {'sub-001'; 'sub-002';'sub-004';'sub-006';'sub-007';'sub-008';'sub-009';'sub-010';...
     'sub-011';'sub-012';'sub-013';'sub-014';'sub-015';'sub-016'; 'sub-018';'sub-019';'sub-020';...
@@ -25,7 +28,7 @@ inter_colors = cbrewer('div','PuOr',256);
 inter_colors = abs(inter_colors);
 inter_colors = flipud(inter_colors);
 
-% Load in GradCPT matrices (runs 001) and average within subjects
+%% Load in GradCPT matrices (runs 001) and average within subjects
 for i=1:length(networks)
     for j=1:length(sublist)
         if ~(sum(contains(skip_sess2,sublist{j}))>0) && ~(sum(contains(skip_sess1,sublist{j}))>0)
@@ -73,7 +76,7 @@ for i=1:length(networks)
     end
 end
 
-% Load in rest matrices (runs 002-004) and average within subjects
+%% Load in rest matrices (runs 002-004) and average within subjects
 for i=1:length(networks)
     for j=1:length(sublist)
         if ~(sum(contains(skip_sess2,sublist{j}))>0) && ~(sum(contains(skip_sess1,sublist{j}))>0)
@@ -122,7 +125,7 @@ for i=1:length(networks)
     end
 end
 
-% similarity between GradCPT and Rest heatmaps per subject
+%% similarity between GradCPT and Rest heatmaps per subject
 for i=1:length(networks)
     for j=1:length(sublist)
         curr_rest = []; curr_gradcpt = [];
@@ -132,7 +135,7 @@ for i=1:length(networks)
     end
 end
 
-% Loop through networks and perform stats for rest and GradCPT
+%% Loop through networks and perform stats for rest and GradCPT
 for i=1:length(networks)
     rest_network_allsubs = []; rest_p_mask = []; rest_subject_mean = [];
     gradcpt_network_allsubs = []; gradcpt_p_mask = []; gradcpt_subject_mean = [];
@@ -159,13 +162,9 @@ for i=1:length(networks)
     gradcpt_network_p{i} = gradcpt_p_mask;
 end
 
-% paired tests between GradCPT vs Rest for each network
+%% paired tests between GradCPT vs Rest for each network
 for i=1:length(networks)
 p_fdr=[]; intertask_p_mask =[];
-    %network_pair = network_pairs{i};
-    %network_a = allnetworks_allsubs{network_pair(1)};
-    %network_b = allnetworks_allsubs{network_pair(2)};
-    %signrank
     for j=1:size(rest_mean{i},1)
         for k=1:size(rest_mean{i},2)
             [intertask_p{i}(j,k),h,z] = signrank(squeeze(gradCPT_mean{i}(j,k,:)),squeeze(rest_mean{i}(j,k,:)));
@@ -177,7 +176,7 @@ p_fdr=[]; intertask_p_mask =[];
     intertask_p_fdr{i} = intertask_p_mask;
 end
 
-% Rest: plot mean heatmaps across all subjects for each network
+%% Rest: plot mean heatmaps across all subjects for each network
 figure('Position',[200,200,215,1800]);
 for i=1:length(rest_network_mean)
     subplot(6,1,i)
@@ -210,7 +209,7 @@ end
 print('-opengl','-r600','-dpng',['figs/rest_heatmaps.png']);  
 pause; close;
 
-% GradCPT: plot mean heatmaps across all subjects for each network
+%% GradCPT: plot mean heatmaps across all subjects for each network
 figure('Position',[200,200,215,1800]);
 for i=1:length(gradcpt_network_mean)
     subplot(6,1,i)
@@ -243,7 +242,7 @@ end
 print('-opengl','-r600','-dpng',['figs/gradcpt_heatmaps.png']);  
 pause; close;
 
-% plot GradCPT vs. Rest
+%% plot GradCPT vs. Rest
 figure('Position',[200,200,215,1800]);
 for i=1:length(intertask_z)
     subplot(6,1,i)
@@ -274,5 +273,3 @@ for i=1:length(intertask_z)
 end
 print('-opengl','-r600','-dpng',['figs/intertask_heatmaps.png']); 
 pause; close;
-
-

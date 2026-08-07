@@ -1,19 +1,33 @@
 % Run mass-univariate stats and plot
 % Significant EEG-fMRI correlations for each network
 % Significant differences in EEG-fMRI correlations between pairs of subnetworks
-% Must first run 01_mk_EEG_fMRI_corr_matrices.m
+% Must first run step1_mk_EEG_fMRI_corr_matrices.m
 
+%% Settings: adjust as needed
+aCompCor = 0; % 0 for GSR, 1 for aCompCor
 rest = 0; % 0 = use full data; 1 = use rest data only
 beta_split = 1; % 0 = don't split up beta band; 1 = split up beta band
-data_dir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/correlation_data/corr_mats'];
+individual_plots = 0;
+addpath('functions');
 mkdir('figs');
-sublist = dir([data_dir '/sub*']);
-sublist = {sublist.name};
 networks = {'DNa';'DNb';'FPCNa';'FPCNb';'dATNa';'dATNb'};
+%networks = {'Yeo17_DNA';'Yeo17_DNB';'Yeo17_FPCNA';'Yeo17_FPCNB';'Yeo17_DATNA';'Yeo17_DATNB'};
+network_plot_labels = {'DNa'; 'DNb'; 'FPCNa'; 'FPCNb'; 'dATNa'; 'dATNb'};
+%network_plot_labels = {'Yeo17-DNa'; 'Yeo17-DNb'; 'Yeo17-FPCNa'; 'Yeo17-FPCNb'; 'Yeo17-dATNa'; 'Yeo17-dATNb'};
 %networks = {'RH_DefaultA_IPL'; 'RH_DefaultB_IPL'; 'RH_ContB_IPL'};
 %networks = {'LH_DefaultA_PFCm'; 'LH_DefaultB_PFCd'; 'LH_ContB_PFCmp'};
 %networks = {'LH_DefaultA_IPL'; 'LH_DefaultB_IPL'; 'LH_ContB_IPL'};
 %networks = {'RH_DefaultB_Temp'; 'RH_ContB_Temp'};
+
+%% CHANGE DIRECTORIES BELOW FOR YOUR SYSTEM
+if aCompCor==1
+    data_dir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/correlation_data_aCompCor/corr_mats'];
+else
+    data_dir = ['/Users/ak4379/Documents/data/R21_EEG-fMRI/derivatives/correlation_data/corr_mats'];
+end
+sublist = dir([data_dir '/sub*']);
+sublist = {sublist.name};
+
 if beta_split==0
     freqs = {'δ'; 'θ'; 'α'; 'β'; 'γ'};
     freqs_plot = {'δ: 1-3 Hz'; 'θ: 4-7 Hz'; 'α: 8-12: Hz'; 'β1: 13-30 Hz'; 'γ: 30-40 Hz'};
@@ -27,6 +41,7 @@ do_network_pairs = 1; % set to 1 to do stats/plot network pairs
 network_pairs = {[1 2];[3 4];[5 6]};
 network_thr ={[-.07 .07];[-.07 .07];[-.11 .11];[-.11 .11];[-.11 .11];[-.11 .11]};
 pair_names = {'DNa > DNb'; 'FPCNa > FPCNb'; 'dATNa > dATNb'};
+%pair_names = {'Yeo17-DNa > Yeo17-DNb'; 'Yeo17-FPCNa > Yeo17-FPCNb'; 'Yeo17-dATNa > Yeo17-dATNb'};
 
 colors = cbrewer('div','RdBu',256);
 colors = abs(colors);
@@ -35,7 +50,7 @@ inter_colors = cbrewer('div','PuOr',256);
 inter_colors = abs(inter_colors);
 inter_colors = flipud(inter_colors);
 
-% Load in and concatenate matrices for each network
+%% Load in and concatenate matrices for each network
 for i=1:length(networks)
     network_allsubs = []; p_mask = []; network_allsubs_lagmean = [];
     for j=1:length(sublist)
@@ -69,9 +84,18 @@ for i=1:length(networks)
     % store mean and p values across subjects for plotting later
     network_mean{i} = mean(network_allsubs,3);
     network_p{i} = p_mask;
+    % individual subject plots
+    if individual_plots==1
+        %plot_eeg_fmri_individuals(network_allsubs,networks{i});
+    end
 end
 
-% paired tests between subnetworks
+%% individual subject paired network plots
+if individual_plots==1
+    plot_eeg_fmri_individuals_networkpairs(allnetworks_allsubs,networks,sublist);
+end
+
+%% paired tests between subnetworks
 if do_network_pairs==1
 for i = 1:size(allnetworks_allsubs,2)/2
     p_fdr=[]; p_mask =[];
@@ -91,7 +115,7 @@ for i = 1:size(allnetworks_allsubs,2)/2
 end
 end
 
-% compute mean corr per network for each frequency band (mean for 0-10 sec lag)
+%% compute mean corr per network for each frequency band (mean for 0-10 sec lag)
 for i=1:length(freqs)
     for j=1:length(networks)
         mean_per_freq(i,j) = mean(allnetworks_allsubs_lagmean{1,j}(:,i));
@@ -101,7 +125,7 @@ for i=1:length(freqs)
     end
 end
 
-% plot mean heatmaps across all subjects for each network
+%% plot mean heatmaps across all subjects for each network
     if rest==1
         figure('Position',[200,200,1500,150]);
     else
@@ -135,7 +159,7 @@ for i=1:length(network_mean)
     %c_max = max(abs(network_mean{i}(:)));
     %caxis([-c_max c_max]);
     caxis(network_thr{i})
-    title(networks{i})
+    title(network_plot_labels{i})
     box off
     hold on;
     [y_fdr,x_fdr]=find(network_p{i}==1);
@@ -145,7 +169,7 @@ end
 print('-opengl','-r600','-dpng',['figs/heatmaps.png']);  
 pause; close;
 
-% plot network a vs b difference maps
+%% plot network a vs b difference maps
 if do_network_pairs==1
     figure('Position',[200,200,300,900]);
 for i=1:length(internetwork_z)
@@ -178,7 +202,7 @@ print('-opengl','-r600','-dpng',['figs/internetwork_heatmaps.png']);
 pause; close;
 end
 
-% plot mean corr per network (0-10 sec lag) for each frequency band
+%% plot mean corr per network (0-10 sec lag) for each frequency band
 figure('Position',[200,200,1300,175]);
 %figure('Position',[200,200,600,375]);
 for i=1:length(freqs)
@@ -202,14 +226,4 @@ for i=1:length(freqs)
 end
 print('-opengl','-r600','-dpng',['figs/freq_by_network_corr.png']); 
 pause; close;
-% for i=1:length(freqs)
-%     subplot(1,length(freqs),i)
-%     boxplot([lagmean_byfreq{1,i}],'Orientation','horizontal',...
-%         'Colors',network_colors,'OutlierSize',1,'Symbol','w+',...
-%         'Widths',.05,'LabelOrientation','horizontal','BoxStyle','filled','PlotStyle','compact')
-%     set(gca,'Fontsize',12,'Fontweight','normal','LineWidth',.5,'TickDir','out','box','off');
-%     yticklabels([networks]);
-%     hold on;
-%     xline(0,'k--')
-% end
 
